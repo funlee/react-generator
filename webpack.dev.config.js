@@ -1,7 +1,18 @@
 const path = require('path');
+const webpack = require('webpack')
+
+devServer:{
+  hot:true
+}
+plugins: [
+  new webpack.HotModuleReplacementPlugin()
+]
 
 module.exports = {
-  entry: path.join(__dirname, 'src/index.js'),
+  entry: [
+    'react-hot-loader/patch',
+    path.join(__dirname, 'src/index.js')
+  ],
   output: {
     path: path.join(__dirname, './dist'),
     filename: 'bundle.js'

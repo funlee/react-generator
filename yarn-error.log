@@ -1,0 +1,59 @@
+Arguments: 
+  C:\node\node.exe C:\Yarn\bin\yarn.js upgrade webpack-dev-server --latest
+
+PATH: 
+  C:\python3\Scripts;C:\python3;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\nvm;C:\node;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\python2\Scripts;C:\python2;C:\Yarn\bin\;C:\Users\i\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\i\AppData\Local\Programs\Python\Python36\;C:\Users\i\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\nvm;C:\node;C:\Users\i\AppData\Local\Yarn\bin
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.9.4
+
+Platform: 
+  win32 x64
+
+npm manifest: 
+  {
+    "name": "react-family",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "dev-build": "webpack --config webpack.dev.config.js",
+      "start": "webpack-dev-server --config webpack.dev.config.js"
+    },
+    "keywords": [
+      "react"
+    ],
+    "author": "funlee",
+    "license": "MIT",
+    "devDependencies": {
+      "babel-core": "^6.26.0",
+      "babel-loader": "^7.1.3",
+      "babel-preset-es2015": "^6.24.1",
+      "babel-preset-react": "^6.24.1",
+      "babel-preset-stage-0": "^6.24.1",
+      "webpack": "^3.11.0",
+      "webpack-cli": "^2.0.10",
+      "webpack-dev-server": "^3.1.0"
+    },
+    "dependencies": {
+      "react": "^16.2.0",
+      "react-dom": "^16.2.0",
+      "react-router-dom": "^4.2.2"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: No lockfile in this directory. Run `yarn install` to generate one.
+      at new MessageError (C:\Yarn\lib\cli.js:186:110)
+      at C:\Yarn\lib\cli.js:89389:13
+      at <anonymous>
