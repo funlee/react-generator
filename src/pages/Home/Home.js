@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
-import {hot} from 'react-hot-loader';
+import React, { Component } from 'react';
 
-class Home extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,13 +17,10 @@ class Home extends Component {
   render() {
     return (
       <div>
-        this is home11222~<br/>
-        当前计数：{this.state.count}<br/>
-        <p>this is a test</p>
+        this is 4444~<br />
+        当前计数：{this.state.count}<br />
         <button onClick={() => this._handleClick()}>自增</button>
       </div>
     )
   }
 }
-
-export default hot(module)(Home);

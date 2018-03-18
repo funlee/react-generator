@@ -1,36 +1,33 @@
-const merge = require('webpack-merge');
-
-const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const commonConfig = require('./webpack.common.config.js');
-
-const publicConfig = {
-  devtool: 'cheap-module-source-map',
+const path = require('path');
+module.exports = {
+  entry: [
+    // 'babel-polyfill',
+    'react-hot-loader/patch',
+    path.join(__dirname, 'src/index.js')
+  ],
+  output: {
+    path: path.join(__dirname, './dist'),
+    filename: 'bundle.js'
+  },
+  /*src文件夹下面的以.js结尾的文件，要使用babel解析*/
+  /*cacheDirectory是用来缓存编译结果，下次编译加速*/
   module: {
     rules: [{
-      test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader?modules&localIdentName=[local]-[hash:base64:5]', 'postcss-loader']
-      })
+      test: /\.js$/,
+      use: ['babel-loader?cacheDirectory=true'],
+      include: path.join(__dirname, 'src')
     }]
   },
-  plugins: [
-    new CleanWebpackPlugin(['dist/*.*']),
-    new UglifyJSPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
-    new ExtractTextPlugin({
-      filename: '[name].[contenthash:5].css',
-      allChunks: true
-    })
-  ]
+  devServer: {
+    port: 8000,
+    contentBase: path.join(__dirname, './dist'),
+    historyApiFallback: true
+  },
+  resolve: {
+    alias: {
+      pages: path.join(__dirname, 'src/pages'),
+      component: path.join(__dirname, 'src/component'),
+      router: path.join(__dirname, 'src/router')
+    }
+  }
 };
-
-module.exports = merge(commonConfig, publicConfig);

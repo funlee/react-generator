@@ -1,32 +1,24 @@
 import React from 'react';
 
-import {Route, Switch, Redirect} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
-import Bundle from './Bundle';
-
-import Home from 'bundle-loader?lazy&name=home!components/Home/Home';
-import About from 'bundle-loader?lazy&name=about!components/About/About';
-
-import Loading from 'common/Loading/Loading';
-import NotFound from 'bundle-loader?lazy&name=notFound!common/NotFound/NotFound';
+import Home from 'pages/Home/Home';
+import Page1 from 'pages/Page1/Page1';
 
 
-const createComponent = (component) => (props) => (
-  <Bundle load={component}>
-    {
-      (Component) => Component ? <Component {...props} /> : <Loading/>
-    }
-  </Bundle>
+const getRouter = () => (
+  <Router>
+    <div>
+      <ul>
+        <li><Link to="/">首页</Link></li>
+        <li><Link to="/page1">Page1</Link></li>
+      </ul>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/page1" component={Page1} />
+      </Switch>
+    </div>
+  </Router>
 );
 
-export default () => (
-  <div>
-    <Switch>
-      <Redirect exact from="/" to="home" />
-      <Route path="/home" component={createComponent(Home)}/>
-      <Route path="/about" component={createComponent(About)}/>
-
-      <Route component={createComponent(NotFound)} />
-    </Switch>
-  </div>
-);
+export default getRouter;
