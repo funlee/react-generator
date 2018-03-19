@@ -7,3 +7,8 @@ cd react-generator
 npm install
 npm run start
 ```
+stack
+------
+* webpack
+* React
+* sass

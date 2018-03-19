@@ -19,18 +19,18 @@ const devConfig = {
   },
   module: {
     rules: [{
-      test: /\.css$/,
-      use: ["style-loader", "css-loader?modules&localIdentName=[local]-[hash:base64:5]", "postcss-loader"]
+      test: /\.scss$/,
+      use: ["style-loader", "css-loader", "sass-loader"]
     }]
   },
   devServer: {
     port: 8080,
     contentBase: path.join(__dirname, './dist'),
-    historyApiFallback: true,
+    historyApiFallback: true
     // host: '0.0.0.0',
-    proxy: {
-      "/api/*": "http://localhost:8090/$1"
-    }
+    // proxy: {
+    //   "/api/*": "http://localhost:8090/$1"
+    // }
   }
 };
 
