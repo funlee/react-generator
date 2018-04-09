@@ -1,23 +1,31 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Bundle from './Bundle';
+import Loading from 'components/common/Loading';
+import NotFound from 'bundle-loader?lazy&name=notFound!components/common/NotFound';
 
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Home from 'bundle-loader?lazy&name=home!views/Home';
+import About from 'bundle-loader?lazy&name=about!views/About';
+import Counter from 'bundle-loader?lazy&name=counter!views/Counter';
+import UserInfo from 'bundle-loader?lazy&name=userInfo!views/UserInfo';
 
-import About from 'views/About';
-import Home from 'views/Home';
 
-const getRouter = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-      </ul>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-      </Switch>
-    </div>
-  </Router>
+const createComponent = (component) => (props) => (
+  <Bundle load={component}>
+    {
+      (Component) => Component ? <Component {...props} /> : <Loading />
+    }
+  </Bundle>
 );
 
-export default getRouter;
+export default () => (
+  <div>
+    <Switch>
+      <Route exact path="/" component={createComponent(Home)} />
+      <Route path="/about" component={createComponent(About)} />
+      <Route path="/counter" component={createComponent(Counter)} />
+      <Route path="/userinfo" component={createComponent(UserInfo)} />
+      <Route component={createComponent(NotFound)} />
+    </Switch>
+  </div>
+);

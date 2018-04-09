@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './index.scss';
 export default class Home extends Component {
   constructor(props) {
     super(props);
@@ -16,7 +16,7 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="home">
         this is home596~<br />
         当前计数：{this.state.count}<br />
         <button onClick={() => this._handleClick()}>自增</button>

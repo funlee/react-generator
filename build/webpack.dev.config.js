@@ -1,36 +1,38 @@
+const merge = require('webpack-merge');
 const path = require('path');
-
-module.exports = {
-
-  /*入口*/
-  entry: [
-    'react-hot-loader/patch',
-    path.join(__dirname, '../src/main.js')
-  ],
-
-  /*输出到dist文件夹，输出文件名字为bundle.js*/
-  output: {
-    path: path.join(__dirname, '../dist'),
-    filename: 'bundle.js'
+const commonConfig = require('./webpack.common.config.js');
+const devConfig = {
+  devtool: 'inline-source-map',
+  entry: {
+    app: [
+      'babel-polyfill',
+      'react-hot-loader/patch',
+      path.join(__dirname, '../src/main.js')
+    ]
   },
-  module:{
+  output: {
+    /*这里本来应该是[chunkhash]的，但是由于[chunkhash]和react-hot-loader不兼容。只能妥协*/
+    filename: '[name].[hash].js'
+  },
+  module: {
     rules: [{
-      test:/\.js$/,
-      use: ['babel-loader?cacheDirectory=true'],
-      include: path.join(__dirname, '../src')
+      test: /\.(css|scss)$/,
+      use: ["style-loader", "css-loader", "postcss-loader"]
     }]
   },
   devServer: {
-    port: 8080,
     contentBase: path.join(__dirname, '../dist'),
     historyApiFallback: true,
-    host: '0.0.0.0'
-  },
-  resolve: {
-    alias: {
-      views: path.join(__dirname, '../src/views'),
-      component: path.join(__dirname, '../src/component'),
-      router: path.join(__dirname, '../src/router')
-    }
+    host: '0.0.0.0',
   }
 };
+
+module.exports = merge({
+  customizeArray(a, b, key) {
+    /*entry.app不合并，全替换*/
+    if (key === 'entry.app') {
+      return b;
+    }
+    return undefined;
+  }
+})(commonConfig, devConfig);
